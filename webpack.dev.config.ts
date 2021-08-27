@@ -1,10 +1,10 @@
 import path from "path";
-import webpack from "webpack";
+import { Configuration, HotModuleReplacementPlugin } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 
-const config: webpack.Configuration = {
+const config: Configuration = {
   mode: "development",
   output: {
     publicPath: "/",
@@ -35,7 +35,7 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    new HotModuleReplacementPlugin(),
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
@@ -45,7 +45,7 @@ const config: webpack.Configuration = {
   ],
   devtool: "inline-source-map",
   devServer: {
-    contentBase: path.join(__dirname, "build"),
+    static: path.join(__dirname, "build"),
     historyApiFallback: true,
     port: 4000,
     open: true,
